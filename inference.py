@@ -57,8 +57,9 @@ class Inference:
 
 
     def read_imagefile(self, file) -> Image.Image:
-        image = Image.open(BytesIO(file)).convert('RGB')
+        # image = Image.open(BytesIO(file)).convert('RGB')
         # image = Image.open(file).convert('RGB')
+        image = Image.open(BytesIO(base64.b64decode(file))).convert('RGB')
         return image
     
     def classify_image(self, file):
@@ -75,6 +76,7 @@ if __name__=="__main__":
     infer = Inference()
     with open("r.png", "rb") as image_file:
         print(infer.classify_image(image_file))
+
     # obj = base64.b64decode(encoded_string)
     # print(type(obj))
     # print(infer.classify_image(obj))
