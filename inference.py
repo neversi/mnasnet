@@ -5,6 +5,7 @@ from PIL import Image
 from io import BytesIO
 import base64
 
+
 PATH = "mnasnet_weights.pt"
 device = "cpu"
 class_names=['akorda', 'baiterek', 'khanshatyr', 'mangilikel', 'mosque', 'nuralem', 'piramida', 'shabyt']
