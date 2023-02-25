@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, File, UploadFile, Form
+from fastapi import FastAPI, File, UploadFile, Body
 from starlette.responses import RedirectResponse
 from torchvision import models, transforms
 import torch.nn as nn
@@ -18,13 +18,13 @@ num_classes = len(class_names)
 app = FastAPI()
 
 @app.post("/predict/image")
-async def predict_api(file: str = Form(...)):
+async def predict_api(payload: dict = Body(...)):
     response = {}
     try:
         # extension = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")
         # if not extension:
             # return "Image must be jpg or png format!"
-        image_str = file
+        image_str = payload["file"]
 
         infer = Inference()
         response = infer.classify_image(image_str)
